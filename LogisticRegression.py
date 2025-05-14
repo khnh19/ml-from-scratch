@@ -41,15 +41,16 @@ def main():
     X, y = datasets.load_breast_cancer(return_X_y=True)
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=86)
+        X, y, test_size=0.2, random_state=86
+    )
 
     clf = LogisticRegression(lr=0.01)
     clf.fit(X_train, y_train)
     predictions = clf.predict(X_test)
-    
+
     acc = np.sum(predictions == y_test) / len(y_test)
     print(acc)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

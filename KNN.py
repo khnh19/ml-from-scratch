@@ -22,7 +22,7 @@ class KNN:
     def _predict(self, x):
         distances = [dist(x, x_train) for x_train in self.X_train]
 
-        k_indices = np.argsort(distances)[:self.k]
+        k_indices = np.argsort(distances)[: self.k]
         k_nearest_labels = [self.y_train[i] for i in k_indices]
 
         most_common = Counter(k_nearest_labels).most_common(1)
@@ -33,11 +33,18 @@ def main():
     X, y = load_iris(return_X_y=True)
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=86)
+        X, y, test_size=0.2, random_state=86
+    )
 
     plt.figure()
-    plt.scatter(X[:, 2], X[:, 3], c=y, cmap=ListedColormap(
-        ['#FF0000', '#00FF00', '#0000FF']), edgecolor='k', s=20)
+    plt.scatter(
+        X[:, 2],
+        X[:, 3],
+        c=y,
+        cmap=ListedColormap(["#FF0000", "#00FF00", "#0000FF"]),
+        edgecolor="k",
+        s=20,
+    )
     plt.show()
 
     clf = KNN(k=3)
@@ -48,5 +55,5 @@ def main():
     print(acc)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

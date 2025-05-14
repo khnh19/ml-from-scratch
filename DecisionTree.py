@@ -5,7 +5,9 @@ from collections import Counter
 
 
 class Node:
-    def __init__(self, feature=None, threshold=None, left=None, right=None, *, value=None):
+    def __init__(
+        self, feature=None, threshold=None, left=None, right=None, *, value=None
+    ):
         self.feature = feature  # feature index for splitting
         self.threshold = threshold  # threshold value for splitting
         self.left = left  # left child node
@@ -24,8 +26,9 @@ class DecisionTree:
         self.root = None
 
     def fit(self, X, y):
-        self.n_features = X.shape[1] if not self.n_features else min(
-            X.shape[1], self.n_features)
+        self.n_features = (
+            X.shape[1] if not self.n_features else min(X.shape[1], self.n_features)
+        )
         self.root = self._grow_tree(X, y)
 
     def _grow_tree(self, X, y, depth=0):
@@ -33,9 +36,11 @@ class DecisionTree:
         n_labels = len(set(y))
 
         # check for stopping criteria
-        if (depth >= self.max_depth or
-                n_labels == 1 or
-                n_samples < self.min_samples_split):
+        if (
+            depth >= self.max_depth
+            or n_labels == 1
+            or n_samples < self.min_samples_split
+        ):
             leaf_value = self._most_common_label(y)
             return Node(value=leaf_value)
 
@@ -122,7 +127,8 @@ def main():
     X, y = datasets.load_breast_cancer(return_X_y=True)
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=86)
+        X, y, test_size=0.2, random_state=86
+    )
 
     clf = DecisionTree(max_depth=10)
     clf.fit(X_train, y_train)
@@ -132,5 +138,5 @@ def main():
     print(acc)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

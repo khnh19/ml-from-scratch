@@ -81,8 +81,7 @@ class KMeans:
 
     # check if old and new centroids are the same
     def _is_converged(self, centroids_old, centroids):
-        distances = [dist(centroids_old[i], centroids[i])
-                     for i in range(self.K)]
+        distances = [dist(centroids_old[i], centroids[i]) for i in range(self.K)]
         return sum(distances) == 0
 
     def plot(self):
@@ -93,7 +92,7 @@ class KMeans:
             ax.scatter(*p)
 
         for p in self.centroids:
-            ax.scatter(*p, marker='x', color='black', linewidth=2)
+            ax.scatter(*p, marker="x", color="black", linewidth=2)
 
         plt.show()
 
@@ -102,17 +101,18 @@ def main():
     np.random.seed(86)
 
     X, y = datasets.make_blobs(
-        n_samples=500, n_features=2, centers=3, shuffle=True, random_state=40)
+        n_samples=500, n_features=2, centers=3, shuffle=True, random_state=40
+    )
 
     print(X.shape)
 
     clusters = len(np.unique(y))
     print(clusters)
     k = KMeans(K=clusters, max_iters=150, plot_steps=True)
-    
+
     y_kmeans = k.predict(X)
     k.plot()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

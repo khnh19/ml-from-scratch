@@ -29,7 +29,7 @@ class PCA:
         eigvals = eigvals[idxs]
 
         # select components
-        self.components = eigvecs[:self.n_components]
+        self.components = eigvecs[: self.n_components]
 
     def transform(self, X):
         X = X - self.mean
@@ -43,20 +43,21 @@ def main():
     pca.fit(X)
     X_pca = pca.transform(X)
 
-    print(f'shape of X: {X.shape}')
-    print(f'shape of X_pca: {X_pca.shape}')
+    print(f"shape of X: {X.shape}")
+    print(f"shape of X_pca: {X_pca.shape}")
 
     x1 = X_pca[:, 0]
     x2 = X_pca[:, 1]
 
-    plt.scatter(x1, x2, c=y, edgecolor='none', alpha=0.8,
-                cmap=plt.cm.get_cmap('viridis', 3))
+    plt.scatter(
+        x1, x2, c=y, edgecolor="none", alpha=0.8, cmap=plt.cm.get_cmap("viridis", 3)
+    )
 
-    plt.xlabel('principal component 1')
-    plt.ylabel('principal component 2')
+    plt.xlabel("principal component 1")
+    plt.ylabel("principal component 2")
     plt.colorbar()
     plt.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

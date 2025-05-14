@@ -53,10 +53,12 @@ class NaiveBayes:
 
 def main():
     X, y = datasets.make_classification(
-        n_samples=1000, n_features=10, n_classes=2, random_state=12345)
+        n_samples=1000, n_features=10, n_classes=2, random_state=12345
+    )
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=14)
+        X, y, test_size=0.2, random_state=14
+    )
 
     nb = NaiveBayes()
     nb.fit(X_train, y_train)
@@ -66,5 +68,5 @@ def main():
     print(acc)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

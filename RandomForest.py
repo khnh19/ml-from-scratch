@@ -17,7 +17,10 @@ class RandomForest:
         self.trees = []
         for _ in range(self.n_trees):
             tree = DecisionTree(
-                max_depth=self.max_depth, min_samples_split=self.min_samples_split, n_features=self.n_features)
+                max_depth=self.max_depth,
+                min_samples_split=self.min_samples_split,
+                n_features=self.n_features,
+            )
             X_sample, y_sample = self._bootstrap_sample(X, y)
             tree.fit(X_sample, y_sample)
             self.trees.append(tree)
@@ -34,8 +37,9 @@ class RandomForest:
     def predict(self, X):
         predictions = np.array([tree.predict(X) for tree in self.trees])
         tree_preds = np.swapaxes(predictions, 0, 1)
-        predictions = np.array([self._most_common(tree_pred)
-                               for tree_pred in tree_preds])
+        predictions = np.array(
+            [self._most_common(tree_pred) for tree_pred in tree_preds]
+        )
         return predictions
 
 
@@ -43,7 +47,8 @@ def main():
     X, y = datasets.load_breast_cancer(return_X_y=True)
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=86)
+        X, y, test_size=0.2, random_state=86
+    )
 
     clf = RandomForest(n_trees=20)
     clf.fit(X_train, y_train)
@@ -53,5 +58,5 @@ def main():
     print(acc)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
